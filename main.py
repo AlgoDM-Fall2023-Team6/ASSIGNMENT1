@@ -265,20 +265,5 @@ with tab10:
    # Display as table
    st.dataframe(df)
 
-#df = pd.read_sql_query(run_q61('Music',9,1998), engine)
-#results = connection.execute(run_q61('Music',9,1998))
-
-#st.write('query 61: Find the ratio of items sold with and without promotions in a given month and year. Only items in certain categories sold to customers living in a specific time zone are considered.')
-#st.write('query 62: For web sales, create a report showing the counts of orders shipped within 30 days, from 31 to 60 days, from 61 to 90 days, from 91 to 120 days and over 120 days within a given year, grouped by warehouse, shipping mode and web site')
-#st.write('query 63: For a given year calculate the monthly sales of items of specific categories, classes and brands that were sold in stores and group the results by store manager. Additionally, for every month and manager print the yearly average sales of those items.')
-#st.write('query 64: Find those stores that sold more cross-sales items from one year to another. Cross-sale items are items that are sold over the Internet, by catalog and in store')
-#st.write('query 65: In a given period, for each store, report the list of items with revenue less than 10% the average revenue for all the items in that store.')
-#st.write('query 66: Compute web and catalog sales and profits by warehouse. Report results by month for a given year during a given 8-hour period.')
-#st.write('query 67: Find top stores for each category based on store sales in a specific year.')
-#st.write('query 68: Compute the per customer extended sales price, extended list price and extended tax for "out of town" shoppers buying from stores located in two cities in the first two days of each month of three consecutive years. Only consider customers with specific dependent and vehicle counts.')
-#st.write('query 69: Count the customers with the same gender, marital status, education status, education status, purchase estimate and credit rating who live in certain states and who have purchased from stores but neither form the catalog nor from the web during a two month time period of a given year ')
-#st.write('query 70: Compute store sales net profit ranking by state and county for a given year and determine the five most profitable states.')'''
-
-
 
 connection.close()
