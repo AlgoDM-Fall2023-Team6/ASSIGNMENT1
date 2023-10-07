@@ -1,0 +1,10 @@
+streamlit==1.15.2
+
+pandas==1.4.4
+numpy==1.23.1
+
+python-dotenv==0.21.0
+sqlalchemy==1.4.41
+snowflake-sqlalchemy==1.4.3
+
+altair==4.2.0
