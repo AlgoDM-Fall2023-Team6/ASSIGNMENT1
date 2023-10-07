@@ -9,7 +9,7 @@ os.environ["SNOWFLAKE_DISABLE_ARROW"] = "1"
 
 
 from dotenv import load_dotenv
-from urllib import parse
+#from urllib import parse
 from sqlalchemy import create_engine 
 from snowflake.sqlalchemy import URL
 
