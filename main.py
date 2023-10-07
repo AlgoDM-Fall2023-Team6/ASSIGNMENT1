@@ -3,11 +3,19 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+
 import os
 os.environ["SNOWFLAKE_DISABLE_ARROW"] = "1"
 
+
+from dotenv import load_dotenv
+from urllib import parse
+from sqlalchemy import create_engine 
 from snowflake.sqlalchemy import URL
-from sqlalchemy import create_engine
+
+# Load credentials from .env 
+load_dotenv()
+
 
 engine = create_engine(URL(
     account = 'dgmgrmk-ug64073',
