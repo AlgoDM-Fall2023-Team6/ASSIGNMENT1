@@ -8,13 +8,13 @@ import os
 os.environ["SNOWFLAKE_DISABLE_ARROW"] = "1"
 
 
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 #from urllib import parse
 from sqlalchemy import create_engine 
 from snowflake.sqlalchemy import URL
 
 # Load credentials from .env 
-#load_dotenv()
+load_dotenv()
 
 
 engine = create_engine(URL(
