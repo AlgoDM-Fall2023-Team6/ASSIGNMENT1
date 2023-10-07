@@ -78,7 +78,7 @@ with tab1:
     df = pd.DataFrame(results.fetchall())
     st.subheader('Query 61')
     st.write('Find the ratio of items sold with and without promotions in a given month and year. Only items in certain categories sold to customers living in a specific time zone are considered.')
-    st.divider()
+    #st.divider()
 
     # Display results
     st.dataframe(df)
@@ -92,7 +92,7 @@ with tab2:
    df = pd.DataFrame(results.fetchall())
    st.subheader('Query 62')
    st.write('For web sales, create a report showing the counts of orders shipped within 30 days, from 31 to 60 days, from 61 to 90 days, from 91 to 120 days and over 120 days within a given year, grouped by warehouse, shipping mode and web site')
-   st.divider()
+   #st.divider()
    # Display as table
    st.dataframe(df)
 
@@ -104,7 +104,7 @@ with tab3:
    df = pd.DataFrame(results.fetchall())
    st.subheader('Query 63')
    st.write('For a given year calculate the monthly sales of items of specific categories, classes and brands that were sold in stores and group the results by store manager. Additionally, for every month and manager print the yearly average sales of those items.')
-   st.divider()
+   #st.divider()
    # Display as table
    st.dataframe(df)
 
@@ -127,7 +127,7 @@ with tab4:
     df = pd.DataFrame(results.fetchall())
     st.subheader('Query 64')
     st.write('Find those stores that sold more cross-sales items from one year to another. Cross-sale items are items that are sold over the Internet, by catalog and in store')
-    st.divider()
+    #st.divider()
 
     # Display results
     st.dataframe(df)
@@ -168,7 +168,7 @@ with tab5:
    df = pd.DataFrame(results.fetchall())
    st.subheader('Query 65')
    st.write('In a given period, for each store, report the list of items with revenue less than 10% the average revenue for all the items in that store.')
-   st.divider()
+   #st.divider()
    # Display as table
    st.dataframe(df)
 
@@ -190,7 +190,7 @@ with tab6:
         df = pd.DataFrame(results.fetchall())
         st.subheader('Query 66')
         st.write('Compute web and catalog sales and profits by warehouse. Report results by month for a given year during a given 8-hour period.')
-        st.divider()
+        #st.divider()
         # Display results
         st.dataframe(df)
 
@@ -205,7 +205,7 @@ with tab7:
    df = pd.DataFrame(results.fetchall())
    st.subheader('Query 67')
    st.write('Find top stores for each category based on store sales in a specific year')
-   st.divider()
+   #st.divider()
    # Display as table
    st.dataframe(df)
 
@@ -230,7 +230,7 @@ with tab8:
         df = pd.DataFrame(results.fetchall())
         st.subheader('Query 68')
         st.write('Compute the per customer extended sales price, extended list price and extended tax for "out of town" shoppers buying from stores located in two cities in the first two days of each month of three consecutive years. Only consider customers with specific dependent and vehicle counts.')
-        st.divider()
+        #st.divider()
         # Display results
         st.dataframe(df)
 
@@ -254,7 +254,7 @@ with tab9:
         df = pd.DataFrame(results.fetchall())
         st.subheader('Query 69')
         st.write('Count the customers with the same gender, marital status, education status, education status, purchase estimate and credit rating who live in certain states and who have purchased from stores but neither form the catalog nor from the web during a two month time period of a given year.')
-        st.divider()
+        #st.divider()
         # Display results
         st.dataframe(df)
 
@@ -269,7 +269,7 @@ with tab10:
    df = pd.DataFrame(results.fetchall())
    st.subheader('Query 70')
    st.write('Compute store sales net profit ranking by state and county for a given year and determine the five most profitable states.')
-   st.divider()
+   #st.divider()
    # Display as table
    st.dataframe(df)
 
