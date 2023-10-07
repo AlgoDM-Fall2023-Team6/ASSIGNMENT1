@@ -64,7 +64,9 @@ with tab1:
     sql_query = f"select promotions,total,cast(promotions as decimal(17,4))/cast(total as decimal(17,4))*100 from (select sum(ss_ext_sales_price) promotions from store_sales, store, promotion, date_dim, customer, customer_address, item where ss_sold_date_sk = d_date_sk and ss_store_sk = s_store_sk and ss_promo_sk = p_promo_sk and ss_customer_sk= c_customer_sk and ca_address_sk = c_current_addr_sk and ss_item_sk = i_item_sk and ca_gmt_offset = -6 and i_category = '{x1}' and (p_channel_dmail = 'Y' or p_channel_email = 'Y' or p_channel_tv = 'Y') and s_gmt_offset = -6 and d_year = {y1} and d_moy = {z1}) promotional_sales, (select sum(ss_ext_sales_price) total from store_sales, store, date_dim, customer, customer_address, item where ss_sold_date_sk = d_date_sk and ss_store_sk = s_store_sk and ss_customer_sk= c_customer_sk and ca_address_sk = c_current_addr_sk and ss_item_sk = i_item_sk and ca_gmt_offset = -6 and i_category = '{x1}' and s_gmt_offset = -6 and d_year = {y1} and d_moy = {z1}) all_sales order by promotions, total limit 100;"
     return sql_query
 
-
+   st.subheader('Query 61')
+   st.write('Find the ratio of items sold with and without promotions in a given month and year. Only items in certain categories sold to customers living in a specific time zone are considered.')
+    #st.divider()
    # Populate selectbox  
    x1 = st.selectbox("Category", distinct_category)
    y1 = st.selectbox("Year", distinct_years)
@@ -76,8 +78,6 @@ with tab1:
     results = connection.execute(query)
     # Convert to DataFrame
     df = pd.DataFrame(results.fetchall())
-    st.subheader('Query 61')
-    st.write('Find the ratio of items sold with and without promotions in a given month and year. Only items in certain categories sold to customers living in a specific time zone are considered.')
     #st.divider()
 
     # Display results
@@ -113,7 +113,9 @@ with tab4:
    def run_q64(x4):
     query=f"with cs_ui as (select cs_item_sk ,sum(cs_ext_list_price) as sale,sum(cr_refunded_cash+cr_reversed_charge+cr_store_credit) as refund from catalog_sales ,catalog_returns where cs_item_sk = cr_item_sk and cs_order_number = cr_order_number group by cs_item_sk having sum(cs_ext_list_price)>2*sum(cr_refunded_cash+cr_reversed_charge+cr_store_credit)), cross_sales as (select i_product_name product_name ,i_item_sk item_sk ,s_store_name store_name ,s_zip store_zip ,ad1.ca_street_number b_street_number ,ad1.ca_street_name b_street_name ,ad1.ca_city b_city ,ad1.ca_zip b_zip ,ad2.ca_street_number c_street_number ,ad2.ca_street_name c_street_name ,ad2.ca_city c_city ,ad2.ca_zip c_zip ,d1.d_year as syear ,d2.d_year as fsyear ,d3.d_year s2year ,count(*) cnt ,sum(ss_wholesale_cost) s1 ,sum(ss_list_price) s2 ,sum(ss_coupon_amt) s3 FROM   store_sales ,store_returns ,cs_ui ,date_dim d1 ,date_dim d2 ,date_dim d3 ,store ,customer ,customer_demographics cd1 ,customer_demographics cd2 ,promotion ,household_demographics hd1 ,household_demographics hd2 ,customer_address ad1 ,customer_address ad2 ,income_band ib1 ,income_band ib2 ,item WHERE  ss_store_sk = s_store_sk AND ss_sold_date_sk = d1.d_date_sk AND ss_customer_sk = c_customer_sk AND ss_cdemo_sk= cd1.cd_demo_sk AND ss_hdemo_sk = hd1.hd_demo_sk AND ss_addr_sk = ad1.ca_address_sk and ss_item_sk = i_item_sk and ss_item_sk = sr_item_sk and ss_ticket_number = sr_ticket_number and ss_item_sk = cs_ui.cs_item_sk and c_current_cdemo_sk = cd2.cd_demo_sk AND c_current_hdemo_sk = hd2.hd_demo_sk AND c_current_addr_sk = ad2.ca_address_sk and c_first_sales_date_sk = d2.d_date_sk and c_first_shipto_date_sk = d3.d_date_sk and ss_promo_sk = p_promo_sk and hd1.hd_income_band_sk = ib1.ib_income_band_sk and hd2.hd_income_band_sk = ib2.ib_income_band_sk and cd1.cd_marital_status <> cd2.cd_marital_status and i_color in ('burlywood','coral','dark','puff','smoke','peach') and i_current_price between 22 and 22 + 10 and i_current_price between 22 + 1 and 22 + 15 group by i_product_name ,i_item_sk ,s_store_name ,s_zip ,ad1.ca_street_number ,ad1.ca_street_name ,ad1.ca_city ,ad1.ca_zip ,ad2.ca_street_number ,ad2.ca_street_name ,ad2.ca_city ,ad2.ca_zip ,d1.d_year ,d2.d_year ,d3.d_year ) select cs1.product_name ,cs1.store_name ,cs1.store_zip ,cs1.b_street_number ,cs1.b_street_name ,cs1.b_city ,cs1.b_zip ,cs1.c_street_number ,cs1.c_street_name ,cs1.c_city ,cs1.c_zip ,cs1.syear ,cs1.cnt ,cs1.s1 as s11 ,cs1.s2 as s21 ,cs1.s3 as s31 ,cs2.s1 as s12 ,cs2.s2 as s22 ,cs2.s3 as s32 ,cs2.syear as syear_2 ,cs2.cnt as cnt_2 from cross_sales cs1,cross_sales cs2 where cs1.item_sk=cs2.item_sk and cs1.syear = {x4} and syear_2 = {x4} + 1 and cnt_2 <= cs1.cnt and cs1.store_name = cs2.store_name and cs1.store_zip = cs2.store_zip order by cs1.product_name ,cs1.store_name ,cs2.cnt ,cs1.s1 ,cs2.s1 LIMIT 100;"
     return query
-
+   st.subheader('Query 64')
+   st.write('Find those stores that sold more cross-sales items from one year to another. Cross-sale items are items that are sold over the Internet, by catalog and in store')
+    #st.divider()
    # Populate selectbox  
   
    x4 = st.selectbox("YEAR", distinct_years)
@@ -125,8 +127,6 @@ with tab4:
     results = connection.execute(query)
     # Convert to DataFrame
     df = pd.DataFrame(results.fetchall())
-    st.subheader('Query 64')
-    st.write('Find those stores that sold more cross-sales items from one year to another. Cross-sale items are items that are sold over the Internet, by catalog and in store')
     #st.divider()
 
     # Display results
@@ -179,7 +179,8 @@ with tab6:
         return query
 
    # Populate selectbox  
-  
+    st.subheader('Query 66')
+    st.write('Compute web and catalog sales and profits by warehouse. Report results by month for a given year during a given 8-hour period.') 
     x6 = st.selectbox("Select YEAR", distinct_years)
     if st.button("Run"):
         # Generate query
@@ -188,9 +189,6 @@ with tab6:
         results = connection.execute(query)
         # Convert to DataFrame
         df = pd.DataFrame(results.fetchall())
-        st.subheader('Query 66')
-        st.write('Compute web and catalog sales and profits by warehouse. Report results by month for a given year during a given 8-hour period.')
-        #st.divider()
         # Display results
         st.dataframe(df)
 
@@ -217,7 +215,8 @@ with tab8:
         return query
 
    # Populate selectbox  
-  
+    st.subheader('Query 68')
+    st.write('Compute the per customer extended sales price, extended list price and extended tax for "out of town" shoppers buying from stores located in two cities in the first two days of each month of three consecutive years. Only consider customers with specific dependent and vehicle counts.')
     x8 = st.selectbox("SELECT YEAR", distinct_years)
     y8 = st.selectbox("City 1", distinct_city)
     z8 = st.selectbox("City 2", distinct_city)
@@ -228,9 +227,6 @@ with tab8:
         results = connection.execute(query)
         # Convert to DataFrame
         df = pd.DataFrame(results.fetchall())
-        st.subheader('Query 68')
-        st.write('Compute the per customer extended sales price, extended list price and extended tax for "out of town" shoppers buying from stores located in two cities in the first two days of each month of three consecutive years. Only consider customers with specific dependent and vehicle counts.')
-        #st.divider()
         # Display results
         st.dataframe(df)
 
@@ -242,7 +238,8 @@ with tab9:
         return query
 
    # Populate selectbox  
-  
+    st.subheader('Query 69')
+    st.write('Count the customers with the same gender, marital status, education status, education status, purchase estimate and credit rating who live in certain states and who have purchased from stores but neither form the catalog nor from the web during a two month time period of a given year.') 
     x9 = st.selectbox("CHOOSE YEAR", distinct_years)
     y9 = st.selectbox("CHOOSE MONTH", distinct_months)
     if st.button("RUN QUERY"):
@@ -252,8 +249,6 @@ with tab9:
         results = connection.execute(query)
         # Convert to DataFrame
         df = pd.DataFrame(results.fetchall())
-        st.subheader('Query 69')
-        st.write('Count the customers with the same gender, marital status, education status, education status, purchase estimate and credit rating who live in certain states and who have purchased from stores but neither form the catalog nor from the web during a two month time period of a given year.')
         #st.divider()
         # Display results
         st.dataframe(df)
