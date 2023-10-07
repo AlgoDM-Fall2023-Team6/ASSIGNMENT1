@@ -22,4 +22,4 @@ Before running the application, make sure you have the following:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/streamlit-snowflake-sql-app.git
+   git clone https://github.com/AlgoDM-Fall2023-Team6/ASSIGNMENT1.git 
